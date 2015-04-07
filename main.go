@@ -43,6 +43,10 @@ func flatten(input bson.M, lkey string, flattened *map[string]interface{}) {
 			(*flattened)[key] = value.(string)
 		} else if _, ok := value.(float64); ok {
 			(*flattened)[key] = value.(float64)
+		} else if _, ok := value.(int); ok {
+			(*flattened)[key] = value.(int)
+		} else if _, ok := value.(int64); ok {
+			(*flattened)[key] = value.(int64)
 		} else if _, ok := value.(bool); ok {
 			(*flattened)[key] = value.(bool)
 		} else if _, ok := value.(time.Time); ok {
