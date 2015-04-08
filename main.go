@@ -62,7 +62,9 @@ func flatten(input bson.M, lkey string, flattened *map[string]interface{}) {
 					stringI := string(i)
 					(*flattened)[stringI] = value.(int)
 				} else {
-					flatten(value.([]interface{})[i].(bson.M), key+"."+strconv.Itoa(i)+".", flattened)
+					if _, ok := value.([]interface{})[i].(bson.M); ok {
+						flatten(value.([]interface{})[i].(bson.M), key+"."+strconv.Itoa(i)+".", flattened)
+					}
 				}
 			}
 		} else {
